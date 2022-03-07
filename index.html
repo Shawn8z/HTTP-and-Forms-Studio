@@ -5,7 +5,9 @@
 	<script>
 		// TODO: create a handler
 		function setSearchEngine() {
+
 			let engine = document.querySelector("input[name=engine]:checked").value;
+
 			
 			let actions = {
 				"google": "https://www.google.com/search",
@@ -21,11 +23,20 @@
 		window.addEventListener("load", function(){
 			// TODO: register the handler
 			let button = document.querySelector("button");
-			
+
 			button.addEventListener("click", function() {
 				let form = document.querySelector("form");
 
-				form.action = setSearchEngine();
+				let checkedRadio = document.querySelector("input[name=engine]:checked");
+				let q = document.querySelector("input[name='q']").value;
+
+				if (q === "") {
+					alert("Type in something to search for")
+				} else if (checkedRadio === null) {
+					alert("Please pick a search engine");
+				} else {
+					form.action = setSearchEngine();
+				}
 			});
 		});
 	</script>
@@ -35,8 +46,8 @@
 
 	<form id="searchForm" method="get">
     <!-- TODO: add form elements -->
-		<input type="text" name="q">
-		<input type="radio" name="engine" id="google" value="google" checked>
+		<input type="text" name="q" value="">
+		<input type="radio" name="engine" id="google" value="google">
 		<label for="google">Google</label>
 
 		<input type="radio" name="engine" id="duckDuckGo" value="duckDuckGo">
